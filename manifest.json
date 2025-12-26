@@ -3,6 +3,9 @@
   "name": "Job form filler",
   "version": "1.0",
   "description": "Auto-fills job application forms",
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html"
   },

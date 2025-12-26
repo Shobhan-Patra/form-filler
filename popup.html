@@ -6,17 +6,52 @@
     <title>Job Form Filler</title>
     <style>
       body {
-        font-family: Arial;
-        padding: 10px;
+        width: 200px;
+        padding: 20px;
       }
       button {
         width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #message {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      input, button {
         padding: 8px;
+        margin: 5px 0;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      label {
+        font-size: 16px;
       }
     </style>
   </head>
   <body>
+    <h1 id="message"></h1>
     <button id="fill">Fill Form</button>
+
+    <h2>Saved Details:</h2>
+    <label for="userName">Name: </label>
+    <input type="text" id="userName" placeholder="Enter your name" />
+
+    <label for="userEmail">Email: </label>
+    <input type="text" id="userEmail" placeholder="Enter your email" />
+
+    <label for="userPhone">Phone: </label>
+    <input type="text" id="userPhone" placeholder="Enter your phone number" />
+
+    <label for="userSkills">Skills: </label>
+    <input type="text" id="userSkills" placeholder="List your skills" />
+
     <script src="popup.js"></script>
   </body>
 </html>
