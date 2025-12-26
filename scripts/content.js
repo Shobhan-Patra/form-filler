@@ -4,6 +4,26 @@ chrome.runtime.onMessage.addListener((request) => {
   }
 });
 
+function getLabel(element) {
+  const labels = document.getElementsByTagName("label");
+  for (let label of labels) {
+    if (label.htmlFor === element.id) {
+      return label.textContent.toLowerCase();
+    }
+  }
+  return "";
+}
+
+function checkField(field, keywords) {
+  const fieldName = (field?.name || "").toLowerCase();
+  const fieldValue = (field?.value || "").toLowerCase();
+  const fieldPlaceholder = (field?.placeholder || "").toLowerCase();
+  const fieldLabel = getLabel(field);
+
+  const fieldDetails = fieldName + fieldValue + fieldPlaceholder + fieldLabel;
+  return keywords.some(keyword => fieldDetails.includes(keyword));
+}
+
 function fillForm() {
   const fields = { 
     name: "John Doe",
@@ -13,21 +33,21 @@ function fillForm() {
   };
 
   document.querySelectorAll("input").forEach(input => {
-    const name = (input.name || "").toLowerCase();
+    const nameKeywords = ["name", "first", "last", "full"];
+    const emailKeywords = ["email", "e-mail", "gmail", "g-mail"];
+    const phoneKeywords = ["mobile", "phone", "tel", "contact"];
+    const skillsKeywords = ["skills", "topics", "experience"];
 
-    if (input.type === "text" && name.includes("name")) {
+    if (checkField(input, nameKeywords)) {
       input.value = fields.name;
     }
-
-    if (input.type === "email") {
+    if (checkField(input, emailKeywords)) {
       input.value = fields.email;
     }
-
-    if (input.type === "tel") {
+    if (checkField(input, phoneKeywords)) {
       input.value = fields.phone;
     }
-
-    if (input.type === "text" && name.includes("skill")) {
+    if (checkField(input, skillsKeywords)) {
       input.value = fields.skills;
     }
 
