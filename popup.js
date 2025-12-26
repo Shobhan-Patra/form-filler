@@ -1,3 +1,23 @@
+// When the popup is loaded, fetch the saved values and set them as placeholders
+document.addEventListener('DOMContentLoaded', function () {
+  // Retrieve saved data from chrome storage
+  chrome.storage.local.get(['userName', 'userEmail', 'userPhone', 'userSkills'], function (data) {
+    // Set the placeholders if saved values are available
+    if (data.userName) {
+      document.getElementById('userName').value = data.userName;
+    }
+    if (data.userEmail) {
+      document.getElementById('userEmail').value = data.userEmail;
+    }
+    if (data.userPhone) {
+      document.getElementById('userPhone').value = data.userPhone;
+    }
+    if (data.userSkills) {
+      document.getElementById('userSkills').value = data.userSkills;
+    }
+  });
+});
+
 document.getElementById("fill").addEventListener("click", () => {
   // Get user entered details from extension popup
   const userName = document.getElementById('userName').value;
